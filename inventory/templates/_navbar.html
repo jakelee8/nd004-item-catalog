@@ -1,0 +1,22 @@
+<div class="top-bar">
+  <div class="row column">
+    <div class="top-bar-title">
+      <span data-responsive-toggle="responsive-menu" data-hide-for="medium">
+        <button class="menu-icon dark" type="button" data-toggle></button>
+        &nbsp;
+      </span>
+      <strong><a href="{{ url_for('index') }}">Inventory</a></strong>
+    </div>
+    <nav id="responsive-menu">
+      <div class="top-bar-right">
+        <ul class="menu">
+          {% if session.get('user_id') %}
+          <li><a href="{{ url_for('signout') }}" class="button">Sign Out</a></li>
+          {% else %}
+          <li><a href="{{ url_for('signin') }}" class="button">Sign In with Google</a></li>
+          {% endif %}
+        </ul>
+      </div>
+    </nav>
+  </div>
+</div>

@@ -1,0 +1,96 @@
+{% extends "_base.html" %}
+
+{% block content %}
+<div class="row">
+  <div class="columns">
+    <nav aria-label="You are here:" role="navigation">
+      <ul class="breadcrumbs">
+        <li><a href="{{ url_for('index') }}">Items</a></li>
+        {% if category %}
+        <li><a href="{{ url_for('view_category', category_id=category.id) }}">{{ category.title }}</a></li>
+        {% endif %}
+        {% if item %}
+        <li><a href="{{ url_for('view_item', item_id=item.id) }}">{{ item.title }}</a></li>
+        <li><span class="show-for-sr">Current: </span> Edit</li>
+        {% else %}
+        <li><span class="show-for-sr">Current: </span> New</li>
+        {% endif %}
+      </ul>
+    </nav>
+  </div>
+</div>
+
+{% if item %}
+{% set action_url = url_for('update_item', item_id=item.id) %}
+{% else %}
+{% set action_url = url_for('create_item') %}
+{% endif %}
+
+<form action="{{ action_url }}" method="post" data-abide novalidate>
+  <div class="row">
+    <div class="small-3 large-2 columns"></div>
+    <div class="small-9 large-10 columns">
+      {% if item %}
+      <h1>Edit Item</h1>
+      {% else %}
+      <h1>New Item</h1>
+      {% endif %}
+      <div data-abide-error class="alert callout" style="display: none;">
+        <p><i class="fa fa-alert" aria-hidden="true"></i> There are some errors in your form.</p>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="small-3 large-2 columns">
+      <label for="title" class="text-right">Title</label>
+    </div>
+    <div class="small-9 large-10 columns">
+      <input type="text" name="title" id="title" placeholder="Title" value="{{ item.title }}" required>
+      <span class="form-error" data-form-error-for="title">This field is required.</span>
+    </div>
+  </div>
+  <div class="row">
+    <div class="small-3 large-2 columns">
+      <label for="summary" class="text-right">Summary</label>
+    </div>
+    <div class="small-9 large-10 columns">
+      <textarea name="summary" id="summary" placeholder="Summary">{{ item.summary or '' }}</textarea>
+    </div>
+  </div>
+  <div class="row">
+    <div class="small-3 large-2 columns">
+      <label for="categories" class="text-right">Categories</label>
+    </div>
+    <div class="small-9 large-10 columns">
+      {% if categories %}
+      <select name="categories" id="categories" multiple aria-describedby="categories-help-text">
+        {% for category in categories %}
+        <option value="{{ category.id }}"
+            {% if item_category_ids and category.id in item_category_ids %}
+            selected
+            {% endif %}>{{ category.title }}</option>
+        {% endfor %}
+      </select>
+      <p class="help-text" id="categories-help-text">Hold down the <kbd>Ctrl</kbd> (PC) / <kbd>Command</kbd> (Mac) button to select multiple options.</p>
+      {% else %}
+      <p><em>No categories defined.</em></p>
+      {% endif %}
+    </div>
+  </div>
+  <div class="row">
+    <div class="small-3 large-2 columns"></div>
+    <div class="small-9 large-10 columns">
+      {% if item %}
+      <button type="submit" form="delete_form" class="small button secondary">Delete</button>
+      {% endif %}
+      <input type="submit" class="button pull-right" value="Save">
+    </div>
+  </div>
+</form>
+
+{% if item %}
+<form class="is-hidden" id="delete_form" action="{{ url_for('delete_item', item_id=item.id) }}" method="post">
+  <input type="hidden" name="_method" value="delete">
+</form>
+{% endif %}
+{% endblock %}

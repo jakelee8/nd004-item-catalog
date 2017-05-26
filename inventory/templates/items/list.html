@@ -1,0 +1,20 @@
+{% extends "_base.html" %}
+
+{% block content %}
+<div class="row">
+  <div class="columns">
+    <nav aria-label="You are here:" role="navigation">
+      <ul class="breadcrumbs">
+        <li><a href="{{ url_for('index') }}">Items</a></li>
+        {% if g.category %}
+        <li><span class="show-for-sr">Current: </span> {{ category.title }}</li>
+        {% endif %}
+      </ul>
+    </nav>
+  </div>
+</div>
+
+<section class="row columns">
+  {% include 'items/_list.html' %}
+</section>
+{% endblock %}

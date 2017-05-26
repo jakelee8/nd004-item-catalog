@@ -1,0 +1,12 @@
+{% extends "_base.html" %}
+
+{% block content %}
+<div class="row">
+  <aside class="large-4 columns">
+    {% include 'categories/_list.html' %}
+  </aside>
+  <section class="large-8 columns">
+    {% include 'items/_list.html' %}
+  </section>
+</div>
+{% endblock %}

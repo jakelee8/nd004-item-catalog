@@ -1,0 +1,5 @@
+name: inventory
+dependencies:
+  - python=3.6
+  - flask>=0.12
+  - pyyaml>=3.12

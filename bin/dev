@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+
+# Configure Flask to run inventory in debug mode.
+export FLASK_APP=inventory
+export FLASK_DEBUG=1
+
+# Install inventory module in editable mode.
+pip install --upgrade --editable .
+
+# Initialize the database.
+flask initdb
+
+# Run the application.
+flask run

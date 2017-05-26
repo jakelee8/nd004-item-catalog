@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+# Create or update the inventory environment.
+conda env create -f environment.yaml || conda env update -f environment.yaml
+
+# Activate the inventory environment.
+source activate inventory

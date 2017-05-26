@@ -1,0 +1,15 @@
+.main {
+  margin-top: 1rem;
+}
+
+.items-table .actions {
+  width: 1%;
+}
+
+.categories-table .actions {
+  width: 1%;
+}
+
+.muted {
+  opacity: 0.65;
+}

@@ -1,0 +1,24 @@
+<!doctype html>
+<html class="no-js" lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Inventory Demo{% endblock %}</title>
+    <link rel="stylesheet" href="/static/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/static/css/foundation.min.css">
+    <link rel="stylesheet" href="/static/css/app.css">
+  </head>
+  <body>
+    {% include "_navbar.html" %}
+    <div class="main">
+      {% block content %}{% endblock %}
+    </div>
+    {% block scripts %}
+    <script src="/static/js/vendor/jquery.min.js"></script>
+    <script src="/static/js/vendor/what-input.js"></script>
+    <script src="/static/js/vendor/foundation.min.js"></script>
+    <script src="/static/js/app.js"></script>
+    {% endblock %}
+  </body>
+</html>
